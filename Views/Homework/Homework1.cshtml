@@ -1,0 +1,74 @@
+﻿﻿
+@{
+    ViewData["Title"] = "Homework1";
+  
+}
+
+<h1>Homework1</h1>
+
+<div id="spots-container"  class="row row-cols-1 row-cols-md-3 g-4"></div>
+
+
+
+
+@section Styles{
+    <style>
+
+
+    </style>
+}
+@section Scripts{
+    <script src="~/js/travel.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const spotsData = spots.CommonFormat.Section;
+            const container = document.getElementById("spots-container");
+
+            spotsData.forEach(spot => {
+                const col = document.createElement("div");
+                col.className = "col";
+
+                const card = document.createElement("div");
+                card.className = "card h-100";
+
+                const img = document.createElement("img");
+                img.className = "card-img-top";
+                img.src = spot.file.img[0].text;  // 使用第一張圖片
+                img.alt = spot.stitle;
+
+                const cardBody = document.createElement("div");
+                cardBody.className = "card-body";
+
+                const cardTitle = document.createElement("h5");
+                cardTitle.className = "card-title";
+                cardTitle.textContent = spot.stitle;
+
+                const cardText = document.createElement("p");
+                cardText.className = "card-text";
+                cardText.textContent = truncateText(spot.xbody,100);
+
+                cardBody.appendChild(cardTitle);
+                cardBody.appendChild(cardText);
+                card.appendChild(img);
+                card.appendChild(cardBody);
+                col.appendChild(card);
+                container.appendChild(col);
+            });
+            function truncateText(text, maxLength) {
+                if (text.length > maxLength) {
+                    return text.substring(0, maxLength) + '...';
+                } else {
+                    return text;
+                }
+            }
+        });
+
+
+    </script>
+    
+    <script>
+        console.log(spots.CommonFormat.Section)
+        console.log(spots.CommonFormat.Section.length)
+    </script>
+}
