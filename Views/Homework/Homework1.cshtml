@@ -1,14 +1,23 @@
 ﻿﻿
 @{
-    ViewData["Title"] = "Homework1";
-  
+    ViewData["Title"] = "Homework1"; 
 }
 
 <h1>Homework1</h1>
 
 <div id="spots-container"  class="row row-cols-1 row-cols-md-3 g-4"></div>
 
-
+@*<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <div class="card h-100">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+        </div>
+    </div>
+</div>*@
 
 
 @section Styles{
@@ -17,54 +26,87 @@
 
     </style>
 }
+
+
 @section Scripts{
     <script src="~/js/travel.js"></script>
 
     <script>
+        //document.addEventListener("DOMContentLoaded", function () {
+        //    const spotsData = spots.CommonFormat.Section;
+        //    const container = document.getElementById("spots-container");
+
+        //    spotsData.forEach(spot => {
+        //        const col = document.createElement("div");
+        //        col.className = "col";
+
+        //        const card = document.createElement("div");
+        //        card.className = "card h-100";
+
+        //        const img = document.createElement("img");
+        //        img.className = "card-img-top";
+        //        img.src = spot.file.img[0].text;  // 使用第一張圖片
+        //        img.alt = spot.stitle;
+
+        //        const cardBody = document.createElement("div");
+        //        cardBody.className = "card-body";
+
+        //        const cardTitle = document.createElement("h5");
+        //        cardTitle.className = "card-title";
+        //        cardTitle.textContent = spot.stitle;
+
+        //        const cardText = document.createElement("p");
+        //        cardText.className = "card-text";
+        //        cardText.textContent = truncateText(spot.xbody,100);
+
+        //        cardBody.appendChild(cardTitle);
+        //        cardBody.appendChild(cardText);
+        //        card.appendChild(img);
+        //        card.appendChild(cardBody);
+        //        col.appendChild(card);
+        //        container.appendChild(col);
+        //    });
+        //    function truncateText(text, maxLength) {
+        //        if (text.length > maxLength) {
+        //            return text.substring(0, maxLength) + '...';
+        //        } else {
+        //            return text;
+        //        }
+        //    }
+        //});
+
         document.addEventListener("DOMContentLoaded", function () {
-            const spotsData = spots.CommonFormat.Section;
-            const container = document.getElementById("spots-container");
+            
+        const card = document.querySelector('#spots-container');
 
-            spotsData.forEach(spot => {
-                const col = document.createElement("div");
-                col.className = "col";
-
-                const card = document.createElement("div");
-                card.className = "card h-100";
-
-                const img = document.createElement("img");
-                img.className = "card-img-top";
-                img.src = spot.file.img[0].text;  // 使用第一張圖片
-                img.alt = spot.stitle;
-
-                const cardBody = document.createElement("div");
-                cardBody.className = "card-body";
-
-                const cardTitle = document.createElement("h5");
-                cardTitle.className = "card-title";
-                cardTitle.textContent = spot.stitle;
-
-                const cardText = document.createElement("p");
-                cardText.className = "card-text";
-                cardText.textContent = truncateText(spot.xbody,100);
-
-                cardBody.appendChild(cardTitle);
-                cardBody.appendChild(cardText);
-                card.appendChild(img);
-                card.appendChild(cardBody);
-                col.appendChild(card);
-                container.appendChild(col);
-            });
-            function truncateText(text, maxLength) {
-                if (text.length > maxLength) {
-                    return text.substring(0, maxLength) + '...';
-                } else {
-                    return text;
-                }
-            }
+        const con = spots.CommonFormat.Section.map(context => {
+            //解構賦值
+            const { stitle, xbody,file} = context;  //{ "name": "Tom", "workYears": 3, "salary": 35000 }
+            // 檢查file.img是否有圖片，如果有則使用第一張圖片，否則使用預設圖片
+            const pic = file.img.length > 0 ? file.img[0].text : "" ;
+            return  `
+                  <div class="col">
+                       <div class="card h-100">
+                            <img src="${pic}" class="card-img-top" alt="${stitle}">
+                            <div class="card-body">
+                                <h5 class="card-title">${stitle}</h5>
+                                <p class="card-text">${truncateText(xbody, 100)}</p>
+                            </div>
+                        </div>
+                  </div>  
+                `
         });
+        card.innerHTML = con.join("");
 
-
+        //100字以內
+        function truncateText(text, maxLength) {
+            if (text.length > maxLength) {
+                return text.substring(0, maxLength) + '...';
+            } else {
+                return text;
+            }
+        }
+        });
     </script>
     
     <script>
