@@ -32,6 +32,7 @@ namespace MSIT158Site.Controllers
             return View();
         }
 
+
         public IActionResult Register()
         {
             return View();
@@ -50,6 +51,23 @@ namespace MSIT158Site.Controllers
             return View();
         }
 
+
+        public IActionResult Spots()
+        {
+            return View();
+        }
+
+
+        public IActionResult CallAPI()
+        {
+            return View();
+        }
+
+
+
+
+
+
         public IActionResult Privacy()
         {
             return View();
@@ -59,6 +77,8 @@ namespace MSIT158Site.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
+
         }
     }
 }

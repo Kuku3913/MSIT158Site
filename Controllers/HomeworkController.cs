@@ -8,5 +8,21 @@ namespace MSIT158Site.Controllers
         {
             return View();
         }
+
+        public IActionResult Homework2()
+        {
+            return View();
+        }
+
+        public IActionResult Homework3()
+        {
+            return View();
+        }
+
+        public IActionResult Homework4()
+        {
+            return View();
+        }
+
     }
 }

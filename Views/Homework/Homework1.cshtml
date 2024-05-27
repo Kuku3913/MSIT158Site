@@ -32,6 +32,7 @@
     <script src="~/js/travel.js"></script>
 
     <script>
+
         //document.addEventListener("DOMContentLoaded", function () {
         //    const spotsData = spots.CommonFormat.Section;
         //    const container = document.getElementById("spots-container");
@@ -75,38 +76,75 @@
         //    }
         //});
 
-        document.addEventListener("DOMContentLoaded", function () {
-            
-        const card = document.querySelector('#spots-container');
+        document.addEventListener("DOMContentLoaded", function () { //第二種map
 
-        const con = spots.CommonFormat.Section.map(context => {
-            //解構賦值
-            const { stitle, xbody,file} = context;  //{ "name": "Tom", "workYears": 3, "salary": 35000 }
-            // 檢查file.img是否有圖片，如果有則使用第一張圖片，否則使用預設圖片
-            const pic = file.img.length > 0 ? file.img[0].text : "" ;
-            return  `
-                  <div class="col">
-                       <div class="card h-100">
-                            <img src="${pic}" class="card-img-top" alt="${stitle}">
-                            <div class="card-body">
-                                <h5 class="card-title">${stitle}</h5>
-                                <p class="card-text">${truncateText(xbody, 100)}</p>
+            const card = document.querySelector('#spots-container');
+
+            const con = spots.CommonFormat.Section.map(context => {
+                //解構賦值
+                const { stitle, xbody, file } = context;  //{ "name": "Tom", "workYears": 3, "salary": 35000 }
+                // 檢查file.img是否有圖片，如果有則使用第一張圖片，否則使用預設圖片
+                const pic = file.img.length > 0 ? file.img[0].text : "";
+                return `
+                      <div class="col">
+                           <div class="card h-100">
+                                <img src="${pic}" class="card-img-top" alt="${stitle}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${stitle}</h5>
+                                    <p class="card-text">${truncateText(xbody, 100)}</p>
+                                </div>
                             </div>
-                        </div>
-                  </div>  
-                `
-        });
-        card.innerHTML = con.join("");
+                      </div>
+                    `
+            });
+            card.innerHTML = con.join("");
 
-        //100字以內
-        function truncateText(text, maxLength) {
-            if (text.length > maxLength) {
-                return text.substring(0, maxLength) + '...';
-            } else {
-                return text;
+            //100字以內
+            function truncateText(text, maxLength) {
+                if (text.length > maxLength) {
+                    return text.substring(0, maxLength) + '...';
+                } else {
+                    return text;
+                }
             }
-        }
         });
+
+
+        //第三種for//document.addEventListener("DOMContentLoaded", function () {
+        //    const card = document.querySelector('#spots-container');
+        //    //const defaultImage = "~/images/istockphoto.jpg"; // 確保這個路徑是正確的
+        //    let str = "";
+
+        //    for (let i = 0; i < spots.CommonFormat.Section.length; i++) {
+        //        const contexts = spots.CommonFormat.Section[i].stitle;
+        //        const contextx = spots.CommonFormat.Section[i].xbody;
+        //        const file = spots.CommonFormat.Section[i].file;
+        //        const contexti = file.img.length > 0 ? file.img[0].text : "";
+
+        //        str += `
+        //                    <div class="col">
+        //                        <div class="card h-100">
+        //                            <img src="${contexti}" class="card-img-top" alt="...">
+        //                            <div class="card-body">
+        //                                <h5 class="card-title">${contexts}</h5>
+        //                                <p class="card-text">${truncateText(contextx, 100)}</p>
+        //                            </div>
+        //                        </div>
+        //                    </div>`;
+        //    }
+
+        //    card.innerHTML = str;
+
+        //    // 文字截斷函數
+        //    function truncateText(text, maxLength) {
+        //        if (text.length > maxLength) {
+        //            return text.substring(0, maxLength) + '...';
+        //        } else {
+        //            return text;
+        //        }
+        //    }
+        //});
+           
     </script>
     
     <script>
